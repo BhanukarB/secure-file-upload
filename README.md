@@ -29,7 +29,7 @@ src/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-repo/secure-file-upload.git
+git clone https://github.com/BhanukarB/secure-file-upload.git
 cd secure-file-upload
 ```
 
