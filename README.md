@@ -17,7 +17,6 @@ A **NestJS backend service** for securely uploading files by **authenticated use
 ```
 src/
 ├── auth/      # Authentication logic (login, JWT, etc.)
-├── users/     # User-related logic
 ├── files/     # File upload logic
 ├── jobs/      # BullMQ processors and queues
 ├── db/        # Database connection (Knex/Prisma)
@@ -63,13 +62,18 @@ REDIS_PORT=6379
 npx prisma migrate dev --name init
 ```
 
-### 6. Start the NestJS server
+### 6. Run this command to seed the first user for testing purposes
+```bash
+npx ts-node prisma/seed.ts
+```
+
+### 7. Start the NestJS server
 
 ```bash
 npm run start:dev
 ```
 
-### 7. Start the background processor (for BullMQ jobs)
+### 8. Start the background processor (for BullMQ jobs)
 
 ```bash
 npm run start:processor
@@ -134,3 +138,9 @@ Content-Type: multipart/form-data
    - `file`: (File) Upload any file
    - `title`: (Text, optional)
    - `description`: (Text, optional)
+
+
+### Eample using Swagger
+1. Open the following url: `http://localhost:3000/api`
+2. Open the Auth module and Login
+3. Copy the access_token and authorize, now all the APIs can use the access_token
