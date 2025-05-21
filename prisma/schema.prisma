@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js" // Generates Prisma Client for Node.js/TypeScript
+}
+
+datasource db {
+  provider = "sqlite"           // Using SQLite as the database provider
+  url      = "file:./dev.db"    // Database file location
+}
+
+model User {
+  id        Int     @id @default(autoincrement()) // Primary key, auto-incremented
+  email     String  @unique                       // Unique email for each user
+  password  String                               // Hashed user password
+  files     File[]                               // One-to-many relation to File
+  createdAt DateTime @default(now())             // Timestamp of user creation
+}
+
+model File {
+  id              Int     @id @default(autoincrement()) // Primary key, auto-incremented
+  userId          Int                                 // Foreign key to User
+  user            User    @relation(fields: [userId], references: [id], onDelete: Cascade) // Relation to User, cascade on delete
+  originalFilename String                             // Original name of the uploaded file
+  storagePath      String                             // Path where the file is stored
+  title            String?                            // Optional file title
+  description      String?                            // Optional file description
+  status           String  @default("uploaded")       // File status, defaults to "uploaded"
+  extractedData    String?                            // Optional extracted data from the file
+  uploadedAt       DateTime @default(now())           // Timestamp of file upload
+}
