@@ -30,7 +30,6 @@ src/
 
 ```bash
 git clone https://github.com/BhanukarB/secure-file-upload.git
-cd secure-file-upload
 ```
 
 ### 2. Install dependencies
@@ -48,7 +47,7 @@ docker run -d -p 6379:6379 --name redis redis
 ### 4. Set up environment variables
 
 Create a `.env` file in the root directory:
-
+we have used sqlite here for our use
 ```ini
 JWT_SECRET=your_jwt_secret
 DATABASE_URL=postgresql://user:password@localhost:5432/yourdb
